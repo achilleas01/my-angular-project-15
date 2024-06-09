@@ -1,0 +1,33 @@
+<app-header></app-header>
+<main>
+    <h2>Welcome to My Angular Project</h2>
+    <p>This is the home page.</p>
+    <app-display [message]="parentMessage" (notify)="onNotify($event)"></app-display>
+    <div *ngIf="notificationMessage">
+        {{ notificationMessage }}
+    </div>
+    <div>
+        <h1>Weather Information</h1>
+      
+        <div *ngIf="weatherData; else loading">
+          <h2>{{ weatherData.name }} Weather</h2>
+          <ul>
+            <li *ngFor="let weather of weatherData.weather">
+              {{ weather.description }}
+            </li>
+          </ul>
+          <p>Temperature: {{ weatherData.main.temp }} °C</p>
+          <p>Humidity: {{ weatherData.main.humidity }} %</p>
+        </div>
+      
+        <ng-template #loading>
+          <p>Loading weather data...</p>
+        </ng-template>
+      
+        <div *ngIf="errorMessage">
+          <p>{{ errorMessage }}</p>
+        </div>
+      </div>      
+</main>
+<app-footer></app-footer>
+  
