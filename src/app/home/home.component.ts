@@ -33,6 +33,9 @@ export class HomeComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnDestroy(): void {
     console.log('HomeComponent OnDestroy');
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
   onNotify(notification: string) {
