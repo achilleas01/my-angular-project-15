@@ -6,28 +6,34 @@
     <div *ngIf="notificationMessage">
         {{ notificationMessage }}
     </div>
+
     <div>
-        <h1>Weather Information</h1>
-      
-        <div *ngIf="weatherData; else loading">
-          <h2>{{ weatherData.name }} Weather</h2>
-          <ul>
-            <li *ngFor="let weather of weatherData.weather">
-              {{ weather.description }}
-            </li>
-          </ul>
-          <p>Temperature: {{ weatherData.main.temp }} °C</p>
-          <p>Humidity: {{ weatherData.main.humidity }} %</p>
+      <h1>Weather Information</h1>
+    
+      <app-card>
+        <div card-header>
+          <h2>Weather in {{ weatherData?.name }}</h2>
+          <p>Latest Conditions</p>
         </div>
-      
-        <ng-template #loading>
-          <p>Loading weather data...</p>
-        </ng-template>
-      
-        <div *ngIf="errorMessage">
+        <div card-body>
+          <ng-container *ngIf="weatherData; else loading">
+            <ul>
+              <li *ngFor="let weather of weatherData.weather">
+                {{ weather.description }}
+              </li>
+            </ul>
+            <p>Temperature: {{ weatherData.main.temp }} °C</p>
+            <p>Humidity: {{ weatherData.main.humidity }} %</p>
+          </ng-container>
+          <ng-template #loading>
+            <p>Loading weather data...</p>
+          </ng-template>
+        </div>
+        <div card-footer *ngIf="errorMessage">
           <p>{{ errorMessage }}</p>
         </div>
-      </div>      
+      </app-card>
+    </div>   
 </main>
 <app-footer></app-footer>
   
